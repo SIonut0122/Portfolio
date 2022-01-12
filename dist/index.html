@@ -1,35 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
-    <title>React App</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet"> 
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet"> 
-
-    <script src="https://kit.fontawesome.com/e25373dbe7.js" crossorigin="anonymous"></script>
-
- 
-<!---------------- SECOND FRAGMENT SHADER -------------------->
-
-<script id="vertexShader" type="x-shader/x-vertex">
-  // Sets precision for float and int types
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="%PUBLIC_URL%/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png"/><link rel="manifest" href="%PUBLIC_URL%/manifest.json"/><title>React App</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet"><script src="https://kit.fontawesome.com/e25373dbe7.js" crossorigin="anonymous"></script><script id="vertexShader" type="x-shader/x-vertex">// Sets precision for float and int types
   precision mediump float;
   precision mediump int;
 
@@ -58,11 +27,7 @@
     vec4 mvPosition = modelViewMatrix * vec4( newpos, 1. );
     gl_PointSize = (10.*randoms + 15.) * (2. / - mvPosition.z);
     gl_Position = projectionMatrix * mvPosition;
-  }
-</script>
- 
-<script id="fragmentShader" type="x-shader/x-fragment">
-    precision mediump float;
+  }</script><script id="fragmentShader" type="x-shader/x-fragment">precision mediump float;
     precision mediump int;
     
     uniform float time;
@@ -89,14 +54,7 @@
       float gradient = smoothstep(0.4,0.6, vUv.y);
       // Set fragment color
       gl_FragColor = vec4(finalColor,alpha*gradient);
-    }
-</script>
-
-
-<!---------------- THIRD FRAGMENT SHADER -------------------->
-
-<script id="thirdVertexShader" type="x-shader/x-vertex">
-  uniform float time;
+    }</script><script id="thirdVertexShader" type="x-shader/x-vertex">uniform float time;
   varying vec2 vUv;
   varying vec3 vPosition;
   varying vec3 vNormal;
@@ -108,12 +66,7 @@
     vNormal = normal;
     v_worldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-  }
-</script>
- 
-<script id="thirdFragmentShader" type="x-shader/x-fragment">
-  
-    uniform float time;
+  }</script><script id="thirdFragmentShader" type="x-shader/x-fragment">uniform float time;
     uniform float progress;
     uniform vec4 resolution;
     varying vec2 vUv;
@@ -152,14 +105,7 @@
     gl_FragColor = vec4(1. - dist,0.,0.0,1.);
     gl_FragColor = vec4(diffusion,0.,0.0,1.);
     gl_FragColor = vec4(scatter,0.,0.0,1.);  
-    }
- 
-</script>
-
-<!---------------- THIRD TUBES FRAGMENT SHADER -------------------->
-
-<script id="thirdTubesVertexShader" type="x-shader/x-vertex">
-  uniform float time;
+    }</script><script id="thirdTubesVertexShader" type="x-shader/x-vertex">uniform float time;
   varying vec2 vUv;
   varying vec3 vPosition;
   varying vec3 vNormal;
@@ -171,12 +117,7 @@
     vNormal = normal;
     v_worldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-  }
-</script>
- 
-<script id="thirdTubesFragmentShader" type="x-shader/x-fragment">
-  
-    uniform float time;
+  }</script><script id="thirdTubesFragmentShader" type="x-shader/x-fragment">uniform float time;
     uniform float progress;
     uniform vec4 resolution;
     varying vec2 vUv;
@@ -215,14 +156,7 @@
     gl_FragColor = vec4(1. - dist,0.,0.0,1.);
     gl_FragColor = vec4(diffusion,0.,0.0,1.);
     gl_FragColor = vec4(scatter,0.,0.0,1.);  
-    }
- 
-</script>
-
-<!---------------- FOURTH FRAGMENT SHADER -------------------->
-
-<script id="fthVertexShader" type="x-shader/x-vertex">
-  uniform float time;
+    }</script><script id="fthVertexShader" type="x-shader/x-vertex">uniform float time;
   varying vec2 vUv;
   varying vec2 vUv1;
   varying vec3 vPosition;
@@ -323,12 +257,7 @@ vec3 hsv2rgb(vec3 c) {
     vColor = hsv2rgb(vec3( noise * 0.1 + 0.03 ,0.8,0.8));
     vNormal = normal;
     gl_Position = projectionMatrix * modelViewMatrix * vec4( newposition, 1.0 );
-  }
-</script>
- 
-<script id="fthFragmentShader" type="x-shader/x-fragment">
-  
-    uniform float time;
+  }</script><script id="fthFragmentShader" type="x-shader/x-fragment">uniform float time;
     uniform float progress;
     uniform vec4 resolution;
 
@@ -358,15 +287,7 @@ vec3 hsv2rgb(vec3 c) {
     gl_FragColor = vec4(light*vColor, 1.);
   
    
-    }
- 
-</script>
-
-
-<!-- FOURTH PARTICLES SHADERS -->
-
-<script id="fthVertexShaderParticles" type="x-shader/x-vertex">
-  uniform float time;
+    }</script><script id="fthVertexShaderParticles" type="x-shader/x-vertex">uniform float time;
   varying vec2 vUv;
   varying vec2 vUv1;
   varying vec3 vPosition;
@@ -391,12 +312,7 @@ vec3 hsv2rgb(vec3 c) {
     vec4 mvPosition = modelViewMatrix * vec4(p, 1.);
     gl_PointSize = 20. * (1. / - mvPosition.z);
     gl_Position = projectionMatrix * mvPosition;
-  }
-</script>
-
-<script id="fthFragmentShaderParticles" type="x-shader/x-fragment">
-  
-  uniform float time;
+  }</script><script id="fthFragmentShaderParticles" type="x-shader/x-fragment">uniform float time;
   uniform float progress;
   uniform vec4 resolution;
 
@@ -408,16 +324,4 @@ vec3 hsv2rgb(vec3 c) {
   gl_FragColor = vec4(7.0, -2.5, -2.7 ,1);
 
  
-  }
-
-</script>
-
-  </head>
-  <body>
-    <script>
-
-    </script>
-    <div id="root"></div>
-
-  </body>
-</html>
+  }</script></head><body><script></script><div id="root"></div><script src="vendors~bundle~vendor.a625601b0375003dc75c.js"></script><script src="vendors~bundle.a625601b0375003dc75c.js"></script><script src="bundle.a625601b0375003dc75c.js"></script><script src="vendor.a625601b0375003dc75c.js"></script></body></html>
