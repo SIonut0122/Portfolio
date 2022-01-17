@@ -1,28 +1,106 @@
-import '../css/thirdPage.css';
 import React from 'react';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import SimplexNoise from 'simplex-noise';
-import { render } from '@testing-library/react';
-import Scrollbar from 'smooth-scrollbar'; 
 import ScrollBooster from "scrollbooster";
-import projectsData from '../js/projects';
-
-
  
+import { render } from '@testing-library/react';
+import '../css/thirdPage.css';
+import * as THREE from 'three';
+
+import ecommtdesign from '../img/projimg/ecommtdesign.png';
+import pizzadel from '../img/projimg/pizzadel.jpg';
+import livechat2 from '../img/projimg/livechat_vtwo.png';
+import fooddel from '../img/projimg/fooddel.jpg';
+import musicplayer from '../img/projimg/musicplayer.png';
+import ecommtv from '../img/projimg/ecommtv.jpg';
+import imgfbhost from '../img/projimg/imgfbhost.png';
+import businesstheme from '../img/projimg/businesstheme.jpg';
+import ecommobile from '../img/projimg/ecommobile.jpg';
+import livechat from '../img/projimg/livechat_vone.jpg';
+
+
+const projectsData = [
+    {
+      title: 'eCommerceTDesign',
+      tech: 'JS / React.js / Redux / Scss / Bootstrap / Webpack / Firebase / FaunaDB',
+      viewProjLink: 'https://sionut0122.github.io/ecommercetdesign/#/',
+      viewSCLink: 'https://github.com/SIonut0122/ecommercetdesign/tree/gh-pages/Source%20code',
+      projImg: ecommtdesign
+    },
+    {
+      title: 'Pizza delivery',
+      tech: 'JS / React.js / Redux / Scss / Bootstrap / Webpack / Firebase',
+      viewProjLink: 'https://sionut0122.github.io/pizzaDelivery/#/',
+      viewSCLink: 'https://github.com/SIonut0122/pizzaDelivery/tree/gh-pages/Source%20code',
+      projImg: pizzadel
+    },
+    {
+      title: 'LiveChat v2.0',
+      tech: 'JS / React.js / Redux / Scss / Bootstrap / Firebase',
+      viewProjLink: 'https://sionut0122.github.io/LiveChatV2.0/',
+      viewSCLink: 'https://github.com/SIonut0122/LiveChatV2.0/tree/gh-pages/LiveChatV2.0%20source%20code',
+      projImg: livechat2
+    },
+    {
+      title: 'foodDelivery',
+      tech: 'JS / React.js / Redux / Router / Scss / Materialize',
+      viewProjLink: 'https://sionut0122.github.io/fooddelivery/',
+      viewSCLink: 'https://github.com/SIonut0122/fooddelivery/tree/gh-pages/foodDelivery',
+      projImg: fooddel
+    },
+    {
+      title: 'Music Player',
+      tech: 'JS / React.js / Scss / Materialize',
+      viewProjLink: 'https://sionut0122.github.io/musicplayer/',
+      viewSCLink: 'https://github.com/SIonut0122/musicplayer/tree/gh-pages/musicPlayer',
+      projImg: musicplayer
+    },
+    {
+      title: 'eCommerceTv',
+      tech: 'JS / React.js / Redux / Scss / Bootstrap / Firebase',
+      viewProjLink: 'https://sionut0122.github.io/ecommercetv/',
+      viewSCLink: 'https://github.com/SIonut0122/ecommercetv/tree/gh-pages/ecommercetv',
+      projImg: ecommtv
+    },
+    {
+      title: 'imgFBHost',
+      tech: 'JS / React.js / Router / Scss / Bootstrap / Firebase',
+      viewProjLink: 'https://sionut0122.github.io/imgfbhost/',
+      viewSCLink: 'https://github.com/SIonut0122/imgfbhost/tree/gh-pages/imgFBHost',
+      projImg: imgfbhost
+    },
+    {
+      title: 'businessTheme',
+      tech: 'JS / React.js / Router / Redux / Scss / Materialize',
+      viewProjLink: 'https://sionut0122.github.io/businesstemplate/',
+      viewSCLink: 'https://github.com/SIonut0122/businesstemplate/tree/gh-pages/businessTemplate',
+      projImg: businesstheme
+    },
+    {
+      title: 'eCommerceMobile',
+      tech: 'JS / React.js / Scss / Bootstrap',
+      viewProjLink: 'https://sionut0122.github.io/eCommerceMobile/',
+      viewSCLink: 'https://github.com/SIonut0122/eCommerceMobile/tree/gh-pages/eCommerceMobile',
+      projImg: ecommobile
+    },
+    {
+      title: 'LiveChat v1.0',
+      tech: 'JS / CSS / Bootstrap / Firebase',
+      viewProjLink: 'https://sionut0122.github.io/livechat/',
+      viewSCLink: 'https://github.com/SIonut0122/livechat/tree/gh-pages/livechat',
+      projImg: livechat2
+    }
+]
+
+
 let width, height;
-let scene,scene1, camera,renderer,controls,pointlight,wrapper,tanFOV,windowHeight;
-let geometry, ctx, material, materialTubes;
+let scene,scene1, camera,renderer,wrapper;
+let material, materialTubes;
 let raycaster,raycastPlane,intersects;
 let yRotation, xRotation;
-
-var clock = new THREE.Clock();
 let time = 0;
-let settings = {
-  progress:0
-}
-
 const simplex = new SimplexNoise(Math.random);
+
+
 
 class ThirdPage extends React.Component {
   constructor(props) {
@@ -37,23 +115,31 @@ class ThirdPage extends React.Component {
   
   componentDidMount() {
 
-   document.querySelector('.thmc_wrscroll_cinside').addEventListener('scroll', (e) => {
-     console.log('sagaga');
-   })
-  
-
     // Horizontal drag projects
     const setupExample4 = () => {
       new ScrollBooster({
         viewport: document.querySelector(".thmc_wrapscroll_content .thmc_wrscroll_cincont"),
         content: document.querySelector(".thmc_wrapscroll_content .thmc_wrc_cintcont_proj"),
         direction: "horizontal",
-        scrollMode: "transform"
+        scrollMode: "transform",
+        onUpdate: (data) => {
+          let xPos = data.position.x;
+          let dragFMore = document.querySelector('.thrd_bott_drgmore_arrow');
+          if(xPos > 370) {
+           if(!dragFMore.classList.contains('drgfmactv')) {
+             dragFMore.classList.add('drgfmactv');
+           }
+          } else {
+            if(dragFMore.classList.contains('drgfmactv')) {
+              dragFMore.classList.remove('drgfmactv');
+            } 
+          }
+        }
       });
     };
 
-    setupExample4();
 
+    setupExample4();
     function computeCurl(x, y, z){
       var eps = 0.0001;
     
@@ -91,7 +177,6 @@ class ThirdPage extends React.Component {
       return curl;
     }
     
-    
    let self = this;
 
 
@@ -112,6 +197,7 @@ class ThirdPage extends React.Component {
 
         renderer.setPixelRatio(window.devicePixelRadio, 2); // set extra quality
         renderer.setSize(width ,height);
+
         // For better quality
         renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.physicallyCorrectLights = true;
@@ -131,28 +217,15 @@ class ThirdPage extends React.Component {
         camera = new THREE.PerspectiveCamera( 70, width / height, 0.1, 1000 );
         camera.position.set(0,0,3);
 
-        
-        // lights
- 
-
-        // // Controlling the object
-        // controls = new OrbitControls(camera, renderer.domElement);
-        // controls.enableZoom = true;
-        // controls.enablePan = false;
-        // controls.autoRotate = false;
-        // controls.autoRotateSpeed = 1.5;
-        // controls.enableDamping = true;
-
-          addObjects();
-          raycast();
-          animate();
-          self.resize();
-      }
+        addObjects();
+        raycast();
+        animate();
+        self.resize();
+    }
       
 
 
       function addObjects() {
-    
         material = new THREE.ShaderMaterial( {
           extensions: {
             derivatives: "#extension GL_0ES_standard_derivatives : enable"
@@ -181,8 +254,7 @@ class ThirdPage extends React.Component {
        fragmentShader: document.getElementById('thirdTubesFragmentShader').textContent
      });
 
-  
-       geometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+      // Create curves
 
        for(let i=0; i<150;i++ ) {
         let path = new THREE.CatmullRomCurve3(getCurve(new THREE.Vector3(
@@ -199,8 +271,6 @@ class ThirdPage extends React.Component {
         curve.scale.set(3,3,3);
         scene.add(curve);
        }
-          
-
       }
 
       
@@ -212,7 +282,6 @@ class ThirdPage extends React.Component {
 
         let currentPoint = start.clone();
 
-         
         for(let i=0; i < 500; i++) {
           // points.push(
           //   new THREE.Vector3(Math.sin(50*i/10),i/10,0)
@@ -225,6 +294,7 @@ class ThirdPage extends React.Component {
         return points;
       }
  
+
       function raycast() {
         raycastPlane = new THREE.Mesh(
           new THREE.PlaneBufferGeometry(10,10),
@@ -262,9 +332,7 @@ class ThirdPage extends React.Component {
 
       function animate() {
       time += 0.05;
-      
-     
-      // document.querySelector('.th_cursor_p').style.transform = `translate(${self.eMouse.x}px,${self.eMouse.y}px)`;
+    
       self.temp.copy(self.eMouse).sub(self.elasticMouse).multiplyScalar(.30);
       self.elasticMouseVel.add(self.temp);
       self.elasticMouseVel.multiplyScalar(.8);
@@ -275,26 +343,20 @@ class ThirdPage extends React.Component {
       
       material.uniforms.uLight.value = self.light.position;
       materialTubes.uniforms.uLight.value = self.light.position;
-
       material.uniforms.time.value = time;
       materialTubes.uniforms.time.value = time;
 
       requestAnimationFrame(animate);
-    //  controls.update();
 
       renderer.clear();
       renderer.render(scene1, camera);
       renderer.clearDepth();
 
       renderer.render(scene,camera);
-       
       }
 
-     
-
+      // Start the magic
       init();
-
-   
 }
  
 
@@ -313,8 +375,6 @@ scrollCinCont(evt) {
 }
 
 projMouseMove(e) {
-
-
   const height = e.target.clientHeight;
   const width = e.target.clientWidth;
 
@@ -322,46 +382,38 @@ projMouseMove(e) {
      x = 0,
      y = 0;
 
- while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-   x += el.offsetLeft - el.scrollLeft;
-   y += el.offsetTop - el.scrollTop;
-   el = el.offsetParent;
- }
+  while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+    x += el.offsetLeft - el.scrollLeft;
+    y += el.offsetTop - el.scrollTop;
+    el = el.offsetParent;
+  }
 
- let xVal = e.clientX - x;
- let yVal = e.clientY - y;
+  let xVal = e.clientX - x;
+  let yVal = e.clientY - y;
 
-    yRotation = 5 * ((xVal - width / 2) / width);
-    xRotation = -5 * ((yVal - height / 2) / height);
-    
+  yRotation = 5 * ((xVal - width / 2) / width);
+  xRotation = -5 * ((yVal - height / 2) / height);
   
-    const string = 'perspective(500px) rotateX(' + xRotation + 'deg) rotateY(' + yRotation + 'deg)';
+  const string = 'perspective(500px) rotateX(' + xRotation + 'deg) rotateY(' + yRotation + 'deg)';
+  
+  /* Apply the calculated transformation */
+  e.target.style.transform = string;
     
-    /* Apply the calculated transformation */
-    e.target.style.transform = string;
-     
 }
 
 projMouseOut() {
-  console.log('out');
-
- 
   let projectBoxes = document.querySelectorAll('.thmc_wrcccont_proj_box');
   let string = 'perspective(-500px)rotateX(0) rotateY(0)';
 
   for(let i=0; i < projectBoxes.length; i++) {
-    projectBoxes[i].style.transform = 'perspective(0) rotateX(0) rotateY(0)';
-     
+    projectBoxes[i].style.transform = 'perspective(0) rotateX(0) rotateY(0)'; 
   }
- 
 }
 
 
 
 
   render() {
-
-    
     return (
         <div>
           <div className='third_main_container' tabIndex='0' role='my work'>
@@ -372,12 +424,13 @@ projMouseOut() {
                 <div className='thmc_wrscroll_cincont' tabIndex='-1'>
                   <div className='thmc_wrc_cintcont_proj'>
                       {projectsData.map((proj,ind) =>
-                        <a key={ind} href='#' tabIndex='0' className='thmc_wrcccont_proj_box'
+                        <a key={ind} href={proj.viewProjLink} target='_blank' tabIndex='0' className='thmc_wrcccont_proj_box'
                         style={{"marginTop": ind % 2 === 0 ? '50px' : '0'}}>
+                        <span className='projbox_title'>{proj.title}</span>
                         <span className='thmcwrc_projbox_outln'></span>
                         <span className='thmcwrc_hovshineffbox'></span>
                         <span className='thmcwrc_projbox_wrap_img'>
-                        <span className='thmcwrc_projbox_img'></span>
+                        <img src={proj.projImg} alt=''/>
                         </span>
                         <span className='thmcwrc_projbox_blt'>  
                         {proj.tech}

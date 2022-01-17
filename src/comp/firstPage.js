@@ -1,24 +1,14 @@
-import '../css/firstPage.css';
 import React from 'react';
-import * as THREE from 'three';
 import gsap from "gsap";
-import TWEEN, { Tween } from "tween";
 import sp1 from '../img/sp1.png';
-
+import * as THREE from 'three';
+import TWEEN, { Tween } from "tween";
 import Scrollbar from 'smooth-scrollbar';
+import '../css/firstPage.css';
  
  
- 
- 
-
-
- 
-
-
 
 const noise = `
- 
-
   vec3 mod289(vec3 x)
   {
     return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -161,8 +151,7 @@ const vertexShader = `
     gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
   }  
 `;
-// -1.5555
-// vec3 phase = vec3(0.9, 0.6, 0.5);
+
 const fragmentShader = `
   varying vec2 vUv;
   varying float vDistort;
@@ -189,21 +178,13 @@ const fragmentShader = `
   }  
 `;
 
-let devBlottxtMat, fEBlottxtMat, frontEndTxt, devText, blotter_dev;
-let scene,camera,renderer,canvas,controls,pointlight,mesh,tween,material,bigMaterial,sCmaterial,thMaterial,canvBound,raycaster,wrapper,tanFOV,windowHeight;
+
+let scene,camera,renderer,canvas,pointlight,mesh,material,bigMaterial,sCmaterial,thMaterial,canvBound,raycaster,wrapper,tanFOV,windowHeight;
 let renderer2, scene2, camera2,wrapper2, bigMesh,scMesh,thMesh;
-const pointer = new THREE.Vector2();
- 
+let pointer = new THREE.Vector2(); 
 let smoothScroll;
 let lastScrollVal = 0;
 let incrScrollValNo = 0;
-
-let topPos = 0;
-let timer = null;
-
-let yPos = 0;
-let scrolling = false;
-let relXPos = 0;
 
 
 class FirstPage extends React.Component {
@@ -215,20 +196,20 @@ class FirstPage extends React.Component {
         feTxtHover: false,
         openMobMenu: false,
         scrollActive: false
-    }
-
-    
+    } 
   }
  
  componentDidMount() {  
 
-  smoothScroll = Scrollbar.init(document.querySelector('#ins_main_c'));
-  smoothScroll.addListener(data => this.secScroll(data));
+      // Initiate smooth scroll
+      smoothScroll = Scrollbar.init(document.querySelector('#ins_main_c'));
+      smoothScroll.addListener(data => this.secScroll(data));
 
 			let theta = 0;
 			const radius = 100;
 
-  
+
+      // Style settings big mesh
       const big_settings = {
         speed: 0.08,
         density: 2.55,
@@ -238,9 +219,7 @@ class FirstPage extends React.Component {
         intensity: 9.6,
       };
 
-  
-
-
+      // Middle mesh
       const settings = {
         speed: 0.2,
         density: 2.25,
@@ -250,8 +229,7 @@ class FirstPage extends React.Component {
         intensity: 4.6,
       };
 
-
-
+      // Second little mesh
       const sCsettings = {
         speed: 0.2,
         density: 2.25,
@@ -260,6 +238,8 @@ class FirstPage extends React.Component {
         amplitude: 2.9,
         intensity: 1.6,
       };
+      
+      // Third little mesh
       const tHsettings = {
         speed: 0.5,
         density: 1,
@@ -268,9 +248,6 @@ class FirstPage extends React.Component {
         amplitude: 0.9,
         intensity: 2,
       };
-
-      // already binded on fpage container
-      // document.addEventListener( 'mousemove', (e) => this.onPointerMove(e));
 
       // Set mousdown and mouseup listeners for container
       document.querySelector('.container').classList.add('md-mu');
@@ -294,24 +271,17 @@ class FirstPage extends React.Component {
         canvas.style.height = canvBound.height;
         canvas.style.maxHeight = '700px';
     
-  
-
         // Create scene
         scene = new THREE.Scene();
          
-     
-      
-
         renderer.setSize(canvBound.width,canvBound.height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // set extra quality
         
-       
         // For better quality
         renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.25;
 
- 
         // Set camera
         camera = new THREE.PerspectiveCamera(4,window.innerWidth/window.innerHeight,1,1000);
         camera.position.set(0,0,40);
@@ -321,9 +291,7 @@ class FirstPage extends React.Component {
         tanFOV = Math.tan( ( ( Math.PI / 180 ) * camera.fov / 2 ) );
         windowHeight = canvBound.height;
         
-  
         // Setting the light scene
-
         // Ambient light
         const ambientLight = new THREE.AmbientLight(0xffffff,0.5)
  
@@ -460,6 +428,7 @@ class FirstPage extends React.Component {
               }
             }
           ); 
+
           gsap.to(
             scMesh.scale,
             1.2,
@@ -472,6 +441,7 @@ class FirstPage extends React.Component {
               delay: 0.3
             }
           ); 
+
           gsap.to(
             thMesh.scale,
             1,
@@ -484,6 +454,7 @@ class FirstPage extends React.Component {
               delay: 0.5
             }
           ); 
+
           gsap.to(
             bigMesh.position,
             1,
@@ -498,13 +469,10 @@ class FirstPage extends React.Component {
         },1000);
 
         
-     
-  
-
         // Animate globe into scene
-        // setTimeout(() => {
-        //   gsap.fromTo(mesh.position, {x: 2, duration: 3, ease: 'elastic'}, {x: 1, duration: 3, ease: 'elastic'});
-        // },1000)
+        setTimeout(() => {
+          gsap.fromTo(mesh.position, {x: 2, duration: 3, ease: 'elastic'}, {x: 1, duration: 3, ease: 'elastic'});
+        },1000)
 
 
          // ---------- Scene two - stars ----------
@@ -520,8 +488,6 @@ class FirstPage extends React.Component {
         renderer2.toneMappingExposure = 1.25;
 
         scene2 = new THREE.Scene();  
-
-
 
         camera2 = new THREE.PerspectiveCamera(4, window.innerWidth / window.innerHeight, 1, 10000);
         camera2.position.set(0,0,40);
@@ -551,8 +517,6 @@ class FirstPage extends React.Component {
         animate();
         
           
-          
-
 
           // ------------ STARS ----------- //
           
@@ -594,7 +558,6 @@ class FirstPage extends React.Component {
           
           color: "rgba(74, 128, 209, 0.89)"
         }),
-
       ];
       
       
@@ -603,9 +566,8 @@ class FirstPage extends React.Component {
       scene2.add(starsT1);
       scene2.add(starsT2);
       
+      // Detect mobile on mount to resize mesh
       detectMobile();
-
-
       }
       
       
@@ -630,8 +592,6 @@ class FirstPage extends React.Component {
      // ---------- RESIZE ----------- //
 
       window.addEventListener('resize', (e) => {
-        
-     
     
         // Resize objects depending on device size
         if(window.innerWidth < 500) {
@@ -645,8 +605,7 @@ class FirstPage extends React.Component {
             document.querySelector('.container').removeEventListener('mousedown', mainPMouseDown);
             document.querySelector('.container').removeEventListener('mouseup', mainPMouseUp);
           }
-         
-
+        
         } else {
           mesh.position.x = 1;
           scMesh.position.x = 1.8;
@@ -669,17 +628,14 @@ class FirstPage extends React.Component {
         let height = window.innerHeight;
 
         // Object background
-        
         camera.aspect = width / height;
         renderer.setSize(width, height);
         camera.updateProjectionMatrix();
 
         // // Scene background
-
         camera2.aspect = width / height;
         renderer2.setSize(width, height + 150);
         camera2.updateProjectionMatrix();
-
       })
 
 
@@ -688,8 +644,6 @@ class FirstPage extends React.Component {
       
       let clock = new THREE.Clock();
  
-     
-
       // ---------- ANIMATE ----------- //
 
       function animate(time) {
@@ -739,29 +693,22 @@ class FirstPage extends React.Component {
 				camera2.position.y = radius * Math.sin( THREE.MathUtils.degToRad( theta ) );
 				camera2.position.z = radius * Math.cos( THREE.MathUtils.degToRad( theta ) );
 
-        
 				camera2.lookAt( scene2.position );
-        
-
 				camera2.updateMatrixWorld();
  
       
 
-				// find intersections
+				// find intersections / mouseover mesh
 
 				// raycaster.setFromCamera( pointer, camera );
 				// const intersects = raycaster.intersectObjects( scene.children, false );
         // let material;
-        
-
 				// if ( intersects.length > 0 ) {
         //   if (INTERSECTED != intersects[0].object) {
         //     if (INTERSECTED){
         //         material = INTERSECTED.material;
         //         if(material.emissive){
         //           console.log('HOVER IN');
-      
-
         //         }
         //         else{
         //             // console.log('Slowing down');
@@ -775,7 +722,6 @@ class FirstPage extends React.Component {
 				// 	INTERSECTED = null;
 				// }
 
-          
         
         renderer.render(scene,camera);
         renderer2.render(scene2,camera2);
@@ -792,6 +738,8 @@ class FirstPage extends React.Component {
 
       /* ------ MOUSE DOWN ------- */
 
+      // On click, animate mesh
+
       function mainPMouseDown() {
           mouseIsDown = true;
           idTimeout = setTimeout(function() {
@@ -800,6 +748,7 @@ class FirstPage extends React.Component {
             }
           }, 1000);
 
+          // Change settings for mesh on click to animate
           // Big globe anim
           const bg_anim = {
             speed: 0.4,
@@ -810,9 +759,6 @@ class FirstPage extends React.Component {
             intensity: 5.7,
           };
           
-          
-  
-
           gsap.to(big_settings, {duration: 0.5, ease: 'power2.out', onStart: function() {
             Object.assign(big_settings, bg_anim);
             gsap.to(
@@ -866,8 +812,8 @@ class FirstPage extends React.Component {
             }
           );
           
-          // Third bottom globe anim
 
+          // Third bottom globe anim
           const thGl_anim = {
             speed: 1,
             density: 1.25,
@@ -880,7 +826,6 @@ class FirstPage extends React.Component {
           gsap.to(tHsettings, {duration: 0.5, ease: 'power2.out', onStart: function() {
             Object.assign(tHsettings,thGl_anim);
           }})
-
 
           gsap.to(
             thMesh.position,
@@ -901,6 +846,7 @@ class FirstPage extends React.Component {
         clearTimeout(idTimeout);
         mouseIsDown = false;
         
+        // On mouse release, restore default settings for meshes
         // Big globe anim
 
         const bigSettings_def = {
@@ -911,7 +857,6 @@ class FirstPage extends React.Component {
           amplitude: 2.9,
           intensity: 4.6,
         };
-        
         
         gsap.to(big_settings, {duration: 0.5, ease: 'power2.out', onStart: function() {
           Object.assign(big_settings, bigSettings_def);
@@ -928,8 +873,8 @@ class FirstPage extends React.Component {
 
         }})
 
-        // Middle globe anim
 
+        // Middle globe anim
         const settings_deff = {
           speed: 0.2,
           density: 2.25,
@@ -968,8 +913,8 @@ class FirstPage extends React.Component {
           Object.assign(sCsettings, sCsettings_deff);
         }})
 
-        // Third globe mesh
 
+        // Third globe mesh
         const tHsettings_def = {
           speed: 0.5,
           density: 1,
@@ -1068,6 +1013,7 @@ openHambMenu() {
 
 
 secScroll(data) {
+  // Detect scroll stop
 //   scrolling = true;
 //   var circle = document.querySelector(".circle");
 
@@ -1194,7 +1140,6 @@ selectMobNav(e) {
 
             <div className='wrapper2'></div>
 
-          
             <div className='wrapper'>
               <canvas className="c"></canvas>
             </div>
