@@ -4,13 +4,9 @@ import * as THREE from 'three';
 import baffle from 'baffle';
  
  
-
- 
 let width, height, composer;
-let scene,camera,meshGeo,renderer,canvas,controls,pointlight,wrapper,tanFOV,windowHeight,particlesMaterial,partPlane;
-let geometry, ctx, material;
-
-var clock = new THREE.Clock();
+let scene,camera,renderer,wrapper,particlesMaterial,partPlane;
+let geometry, material;
 let time = 0;
 
 
@@ -35,19 +31,7 @@ class FourthPage extends React.Component {
 
   
     function init() {
-      // let canvas = wrapper.getElementsByTagName('canvas')[0];
-      // let canvBound = wrapper.getBoundingClientRect()
-      
-      //  let canvBound = wrapper.getBoundingClientRect();
-      
-      // canvas.width = 100;
-      // canvas.height = 100;
-      // canvas.style.display = 'block';
-      // canvas.style.width = window.innerWidth;
-      // canvas.style.height = window.innerHeight;
-      
-      
-      
+ 
       // Create scene
         scene = new THREE.Scene();
       
@@ -106,7 +90,8 @@ class FourthPage extends React.Component {
         
         sphere.position.y = 0;
         sphere.position.x = 0;
-  
+
+        // Strikes mesh effects
         //  scene.add( sphere );
       }
 
@@ -160,18 +145,14 @@ class FourthPage extends React.Component {
         scene.add( partPlane );
       }
 
-
- 
-      
       function animate() {
-      time += 0.05;
+        time += 0.05;
 
-      material.uniforms.time.value = time;
-      particlesMaterial.uniforms.time.value = time * 0.4;
-      partPlane.rotation.y = time / 10;
-      requestAnimationFrame(animate);
-      renderer.render(scene,camera);
-  
+        material.uniforms.time.value = time;
+        particlesMaterial.uniforms.time.value = time * 0.4;
+        partPlane.rotation.y = time / 10;
+        requestAnimationFrame(animate);
+        renderer.render(scene,camera);
       }
 
       // Set listeners for baffle text
@@ -186,90 +167,87 @@ class FourthPage extends React.Component {
 }
  
 
-resize() {
-  width = window.innerWidth;
-  height = window.innerHeight;
-  renderer.setSize(width, height);
- 
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-}
+    resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      renderer.setSize(width, height);
+    
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
 
-fthMouseMove(e) {
-  var lMouseX = Math.max(-100, Math.min(100, document.querySelector('.fth_wrapper_canvas').offsetWidth / 2 - e.clientX));
-    let followX = this.state.followX = (50 * lMouseX) / 200; // here might be the problem with directly state change
+    fthMouseMove(e) {
+      var lMouseX = Math.max(-100, Math.min(100, document.querySelector('.fth_wrapper_canvas').offsetWidth / 2 - e.clientX));
+        let followX = this.state.followX = (50 * lMouseX) / 200; // here might be the problem with directly state change
 
-    var lMouseY = Math.max(-100, Math.min(100, document.querySelector('.fth_wrapper_canvas').offsetHeight/ 2 - e.clientY));
-    let followY = this.state.followY = (50 * lMouseY) / 200; // here might be the problem with directly state change
+        var lMouseY = Math.max(-100, Math.min(100, document.querySelector('.fth_wrapper_canvas').offsetHeight/ 2 - e.clientY));
+        let followY = this.state.followY = (50 * lMouseY) / 200; // here might be the problem with directly state change
 
-    let y = this.state.y;
-    let x = this.state.x;
-    let translate;
+        let y = this.state.y;
+        let x = this.state.x;
+        let translate;
 
-    // Animate backend background
-    x += (followX - x) * this.state.friction;
-    y += (followY - y) * this.state.friction;
-    translate = 'translate(' + x + '%,'+ y + '%)';
-    let underBg = document.querySelector('.fth_wrapper_canvas');
-        underBg.style.transform = translate;
-}
+        // Animate backend background
+        x += (followX - x) * this.state.friction;
+        y += (followY - y) * this.state.friction;
+        translate = 'translate(' + x + '%,'+ y + '%)';
+        let underBg = document.querySelector('.fth_wrapper_canvas');
+            underBg.style.transform = translate;
+    }
 
 
-hoverTxtActIn(e) {
-	let c = baffle(e.target);
-	let value = e.target.innerHTML;
- let clsName = e.target.classList[1];
- 
-  if(this.state.obfsCls !== clsName) {
-    this.setState({ obfsCls: clsName})
-  }
-      c.set({
-      characters: 'Tfz^thDenzYVLoprR96zJkstTezioPpeqKjbzHiFEnD',
-      speed:100
- 
-  })
-	
-    c.start();
-    c.reveal(1300);
+  hoverTxtActIn(e) {
+    let c = baffle(e.target);
+    let value = e.target.innerHTML;
+  let clsName = e.target.classList[1];
   
-  setTimeout(() => {
-   let hovTxt = document.querySelectorAll('.bftxt_fth');
+    if(this.state.obfsCls !== clsName) {
+      this.setState({ obfsCls: clsName})
+    }
+        c.set({
+        characters: 'Tfz^thDenzYVLoprR96zJkstTezioPpeqKjbzHiFEnD',
+        speed:100
+    })
+    
+      c.start();
+      c.reveal(1300);
+    
+    setTimeout(() => {
+    let hovTxt = document.querySelectorAll('.bftxt_fth');
 
-   for(let i=0; i<hovTxt.length; i++) {
-    if(hovTxt[i].classList[1] !== hovTxt[i]) {
-      hovTxt[i].innerHTML = hovTxt[i].classList[1];
-    } 
-   }
-  },1310);
+    for(let i=0; i<hovTxt.length; i++) {
+      if(hovTxt[i].classList[1] !== hovTxt[i]) {
+        hovTxt[i].innerHTML = hovTxt[i].classList[1];
+      } 
+    }
+    },1310);
 
-  let fthBg = document.querySelector('.fth_wrapper_canvas');
+    let fthBg = document.querySelector('.fth_wrapper_canvas');
 
-  if(!fthBg.classList.contains('fth_shkeff')) {
-    fthBg.classList.add('fth_shkeff');
-    // Remove shake effect after 500ms
-    setTimeout( () => {
-      document.querySelector('.fth_wrapper_canvas').removeAttribute('style');
-    },500);
+    if(!fthBg.classList.contains('fth_shkeff')) {
+      fthBg.classList.add('fth_shkeff');
+      // Remove shake effect after 500ms
+      setTimeout( () => {
+        document.querySelector('.fth_wrapper_canvas').removeAttribute('style');
+      },500);
+    }
   }
-}
 
-hoverTxtActOut() {
-  // Remove shake effect
-  document.querySelector('.fth_wrapper_canvas').classList.remove('fth_shkeff');
-}
+  hoverTxtActOut() {
+    // Remove shake effect
+    document.querySelector('.fth_wrapper_canvas').classList.remove('fth_shkeff');
+  }
 
-scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    left: 100,
-    behavior: 'smooth'
-  });
-}
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 100,
+      behavior: 'smooth'
+    });
+  }
 
 
   render() {
-
-    
     return (
         <div>
           <div className='wrap_fth_cont' tabIndex='0' role='contact'>
@@ -301,6 +279,7 @@ scrollToTop() {
 
                 </div>
               </div>
+              <span className='fthp_crdbtm'>2022 @ Stan Ionut</span>
             </div>
             <div className='fth_goup_btn' tabIndex='0' role='go up button'>
               <span></span>

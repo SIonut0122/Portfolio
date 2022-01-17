@@ -87,7 +87,7 @@ const projectsData = [
       tech: 'JS / CSS / Bootstrap / Firebase',
       viewProjLink: 'https://sionut0122.github.io/livechat/',
       viewSCLink: 'https://github.com/SIonut0122/livechat/tree/gh-pages/livechat',
-      projImg: livechat2
+      projImg: livechat
     }
 ]
 
@@ -181,8 +181,6 @@ class ThirdPage extends React.Component {
 
 
   window.addEventListener('resize', () => this.resize());
-
-  
     function init() {
 
       // Create scene
@@ -279,7 +277,6 @@ class ThirdPage extends React.Component {
         let points = [];
 
         points.push(start);
-
         let currentPoint = start.clone();
 
         for(let i=0; i < 500; i++) {
@@ -295,11 +292,11 @@ class ThirdPage extends React.Component {
       }
  
 
+      // Get mouse - mesh interactions for hover effect
       function raycast() {
         raycastPlane = new THREE.Mesh(
           new THREE.PlaneBufferGeometry(10,10),
           new THREE.MeshBasicMaterial({color: 0x000})
-          
         )
 
         self.light = new THREE.Mesh(

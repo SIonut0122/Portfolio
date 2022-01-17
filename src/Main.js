@@ -20,9 +20,7 @@ class Main extends React.Component {
       contactContainer: false,
       displayCont: false,
       displayLoading: true
-  }
-
-    
+    }
   }
  
 componentDidMount() {  
@@ -34,10 +32,7 @@ componentDidMount() {
       document.body.classList.remove('using-mouse');
     });
 
-    // setTimeout(() => {
-    //     this.setState({ displayLoading: false, displayCont: true })
-    // }, 2000);
-
+    // Transitions for loading cont
     setTimeout(() => {
       document.querySelector('.mcwlog_fdot').style.opacity = '0';
     }, 1700);
@@ -56,7 +51,6 @@ componentDidMount() {
 
     return (
         <div>
-
             {this.state.displayLoading && ( 
               <div className='main_c_loadingwrap'>
               <div className='mclrwplog_cont'>
@@ -71,6 +65,7 @@ componentDidMount() {
               </div>
             </div> 
             )}
+
             {this.state.displayCont && (
               <div className='main_container' id='ins_main_c'>
                 <div className='inside_main_cont'>
@@ -89,7 +84,6 @@ componentDidMount() {
                       </div>
                     </div>
                       
-
                     <div className='sec_page_wrcont'><SecondPage/></div>
                     <ThirdPage/>
                     <FourthPage/>
