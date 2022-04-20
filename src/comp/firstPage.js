@@ -181,10 +181,10 @@ const fragmentShader = `
 
 let scene,camera,renderer,canvas,pointlight,mesh,material,bigMaterial,sCmaterial,thMaterial,canvBound,raycaster,wrapper,tanFOV,windowHeight;
 let renderer2, scene2, camera2,wrapper2, bigMesh,scMesh,thMesh;
-let pointer = new THREE.Vector2(); 
 let smoothScroll;
 let lastScrollVal = 0;
 let incrScrollValNo = 0;
+let pointer = new THREE.Vector2(); 
 
 
 class FirstPage extends React.Component {
@@ -236,17 +236,17 @@ class FirstPage extends React.Component {
         strength: 0.15,
         frequency:0.6,
         amplitude: 2.9,
-        intensity: 1.6,
+        intensity: 3.6,
       };
       
       // Third little mesh
       const tHsettings = {
         speed: 0.5,
         density: 1,
-        strength: 0.45,
+        strength: 0.30,
         frequency:0.6,
         amplitude: 0.9,
-        intensity: 2,
+        intensity: 2.5,
       };
 
       // Set mousdown and mouseup listeners for container
@@ -574,7 +574,6 @@ class FirstPage extends React.Component {
       const detectMobile = () => {
         let isMobileDevice = window.matchMedia("only screen and (max-width: 500px)").matches;
         if(isMobileDevice){
-         console.log('mobile');
           mesh.position.x = 0;
           scMesh.position.x = 0.5;
           thMesh.position.x = 0.2;
@@ -727,7 +726,8 @@ class FirstPage extends React.Component {
         renderer2.render(scene2,camera2);
       }
 
-  
+      // Initiate
+      
       init();
 
       // Detect bg click
@@ -906,7 +906,7 @@ class FirstPage extends React.Component {
           strength: 0.15,
           frequency:0.6,
           amplitude: 2.9,
-          intensity: 1.6,
+          intensity: 3.6,
         };
         
         gsap.to(sCsettings, {duration: 0.4, ease: 'power2.out', onStart: function() {
@@ -918,10 +918,10 @@ class FirstPage extends React.Component {
         const tHsettings_def = {
           speed: 0.5,
           density: 1,
-          strength: 0.45,
+          strength: 0.30,
           frequency:0.6,
           amplitude: 0.9,
-          intensity: 2,
+          intensity: 2.5,
         };
 
         gsap.to(tHsettings, {duration: 0.5, ease: 'power2.out', onStart: function() {
@@ -1165,8 +1165,8 @@ selectMobNav(e) {
                 <span className='lf_nm_sc_fimg'><span></span></span>
             </div>
 
-            <div className='fp_wraphambmenu'>
-              <div id='hamb_btn' tabIndex='0' role='open menu' onClick={() => this.openHambMenu()}>
+            <div className='fp_wraphambmenu' tabIndex='0' role='open menu'>
+              <div id='hamb_btn' tabIndex='1' role='open menu' onClick={() => this.openHambMenu()}>
               <div></div>
               </div>
             </div>
@@ -1180,11 +1180,11 @@ selectMobNav(e) {
                 <span className='fmobwr_navlnk' onClick={(e) => this.selectMobNav(e)} tabIndex='0' role='contact'>Contact</span>
               </div>
 
-              <div className='fpover_mobm_wrsocial' tabIndex='0' role='social media menu'>
+              <div className='fpover_mobm_wrsocial'>
                 <div className='fpover_mb_socialmenu' tabIndex='0' role='social media menu'>
-                    <a href='https://www.linkedin.com/in/stan-ionut-1193a0159/'><i className='fab fa-linkedin' tabIndex='0' role='linkedin'></i></a>
-                    <a href='https://github.com/SIonut0122'><i className='fab fa-github' tabIndex='0' role='github'></i></a>
-                    <a href='mailto:sionut0122@yahoo.com'><i className='fas fa-envelope' tabIndex='0' role='email'></i></a>
+                    <a href='https://www.linkedin.com/in/stan-ionut-1193a0159/' tabIndex='0' role='linkedin'><i className='fab fa-linkedin'></i></a>
+                    <a href='https://github.com/SIonut0122' tabIndex='0' role='github'><i className='fab fa-github'></i></a>
+                    <a href='mailto:sionut0122@yahoo.com' tabIndex='0' role='email'><i className='fas fa-envelope'></i></a>
                 </div>
               </div>
             </div>

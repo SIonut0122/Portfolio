@@ -279,8 +279,8 @@ class FourthPage extends React.Component {
 
                 </div>
               </div>
-              <span className='fthp_crdbtm'>2022 @ Stan Ionut</span>
             </div>
+            <span className='fthp_crdbtm' tabIndex='0' role='credits - 2022 Stan Ionut'>2022 @ Stan Ionut</span>
             <div className='fth_goup_btn' tabIndex='0' role='go up button'>
               <span></span>
               <span>go</span>

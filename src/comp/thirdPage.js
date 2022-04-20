@@ -7,6 +7,7 @@ import '../css/thirdPage.css';
 import * as THREE from 'three';
 
 import ecommtdesign from '../img/projimg/ecommtdesign.png';
+import ecommjager from '../img/projimg/ecommjager.png';
 import pizzadel from '../img/projimg/pizzadel.jpg';
 import livechat2 from '../img/projimg/livechat_vtwo.png';
 import fooddel from '../img/projimg/fooddel.jpg';
@@ -25,6 +26,13 @@ const projectsData = [
       viewProjLink: 'https://sionut0122.github.io/ecommercetdesign/#/',
       viewSCLink: 'https://github.com/SIonut0122/ecommercetdesign/tree/gh-pages/Source%20code',
       projImg: ecommtdesign
+    },
+    {
+      title: 'eCommerceJager',
+      tech: 'JS / Scss / React.js / Redux / Router / Three.js',
+      viewProjLink: 'https://sionut0122.github.io/ecommercejager/#/',
+      viewSCLink: 'https://github.com/SIonut0122/ecommercejager/tree/gh-pages/source-code',
+      projImg: ecommjager
     },
     {
       title: 'Pizza delivery',
@@ -372,6 +380,7 @@ scrollCinCont(evt) {
 }
 
 projMouseMove(e) {
+  // Apply movement to project boxes
   const height = e.target.clientHeight;
   const width = e.target.clientWidth;
 
@@ -423,13 +432,13 @@ projMouseOut() {
                       {projectsData.map((proj,ind) =>
                         <a key={ind} href={proj.viewProjLink} target='_blank' tabIndex='0' className='thmc_wrcccont_proj_box'
                         style={{"marginTop": ind % 2 === 0 ? '50px' : '0'}}>
-                        <span className='projbox_title'>{proj.title}</span>
+                        <span className='projbox_title' tabIndex='0' role={proj.title}>{proj.title}</span>
                         <span className='thmcwrc_projbox_outln'></span>
                         <span className='thmcwrc_hovshineffbox'></span>
                         <span className='thmcwrc_projbox_wrap_img'>
                         <img src={proj.projImg} alt=''/>
                         </span>
-                        <span className='thmcwrc_projbox_blt'>  
+                        <span className='thmcwrc_projbox_blt' tabIndex='0' role='techonologies used'>  
                         {proj.tech}
                         <i className="fas fa-arrow-down"></i>
                         </span>

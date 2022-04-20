@@ -4,8 +4,6 @@ import FirstPage from './comp/firstPage.js'
 import SecondPage from './comp/secondPage.js'
 import ThirdPage from './comp/thirdPage.js'
 import FourthPage from './comp/fourthPage.js'
-import Scrollbar from 'smooth-scrollbar';
-import gsap from "gsap";
 
 
 
@@ -24,7 +22,7 @@ class Main extends React.Component {
   }
  
 componentDidMount() {  
-  	// Handle focus outline on mouse / keyboard
+  	// Handle / detect focus outline on mouse / keyboard
     document.body.addEventListener('mousedown', function() {
       document.body.classList.add('using-mouse');
     });
@@ -34,14 +32,17 @@ componentDidMount() {
 
     // Transitions for loading cont
     setTimeout(() => {
+      // Hide dot from i letter
       document.querySelector('.mcwlog_fdot').style.opacity = '0';
     }, 1700);
     setTimeout(() => {
+      // Decrease opacity for loading page
       document.querySelector('.main_c_loadingwrap').style.opacity = '0';
+      // Render all components and hide unmount loading container
+      setTimeout(() => {
+        this.setState({ displayLoading: false, displayCont: true })
+      }, 300);
     }, 2500);
-    setTimeout(() => {
-      this.setState({ displayLoading: false, displayCont: true })
-    }, 3000);
 }
 
 

@@ -107,7 +107,7 @@ body {
 	transition: opacity 0.25s linear;
 	// width: clamp(1.4rem, 2vw + 1.1rem, 6rem);
 	// height: clamp(2rem, 1.4vw + 1.7rem, 5rem);
-	width: 40px;
+	width: 42px;
 	height: 40px;
 	display: flex;
 	align-items: center;
@@ -550,7 +550,7 @@ body {
 
 @media screen and (max-width: 800px) {
 	.fpc_g_htxt {
-		height: 60px;
+		height: 65px;
 		font-size: 60px;
 		width: 100%;
 	}
@@ -572,7 +572,7 @@ body {
 	.fpc_g_htxt {
 		font-size: 50px;
 		white-space: nowrap;
-		height: 50px;
+		height: 53px;
 	}
 }
 
