@@ -213,7 +213,6 @@ resize() {
             </div>
             <div className='secwrcont_wraphalf'>
               <div className='secwrc_wrh_mainh scrc_wrh_mainh_one'>
-                
               </div>
               <div className='secwrc_wrh_mainh scrc_wrh_mainh_two'>
                 <div className='secwrc_wmt_wrtxt_one' tabIndex='0' role='about me'> 

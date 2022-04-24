@@ -423,10 +423,13 @@ projMouseOut() {
     return (
         <div>
           <div className='third_main_container' tabIndex='0' role='my work'>
+              <span className='mptp_ptitle'>my work</span>
             <span className='third_mc_topsmkbg'></span>
             <div className='third_mc_wrapcanvas'></div>
             <div className='thmc_wrapscroll_content'>
               <div className='thmc_wrscroll_cinside'>
+
+                {/* Normal size container */}
                 <div className='thmc_wrscroll_cincont' tabIndex='-1'>
                   <div className='thmc_wrc_cintcont_proj'>
                       {projectsData.map((proj,ind) =>
@@ -444,9 +447,29 @@ projMouseOut() {
                         </span>
                       </a>
                       )}
-
                   </div>
                 </div>
+                
+                {/* Small size container */}
+                <div className='thmc_wrscoll_cincont_smsz'>
+                    <div className='thmc_wrsc_cicsmsz_wrproj'>
+                    {projectsData.map((proj,ind) =>
+                        <a key={ind} href={proj.viewProjLink} target='_blank' tabIndex='0' className='thmc_wrcccont_proj_box'>
+                        <span className='projbox_title' tabIndex='0' role={proj.title}>{proj.title}</span>
+                        <span className='thmcwrc_projbox_outln'></span>
+                        <span className='thmcwrc_hovshineffbox'></span>
+                        <span className='thmcwrc_projbox_wrap_img'>
+                        <img src={proj.projImg} alt=''/>
+                        </span>
+                        <span className='thmcwrc_projbox_blt' tabIndex='0' role='techonologies used'>  
+                        {proj.tech}
+                        <i className="fas fa-arrow-down"></i>
+                        </span>
+                      </a>
+                      )}
+                    </div>
+                </div>
+
               </div>
             </div>
             <span className='third_mc_bottomsmkbg'></span>

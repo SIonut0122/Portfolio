@@ -16,8 +16,8 @@ class Main extends React.Component {
       projectsContainer: false,
       aboutContainer: false,
       contactContainer: false,
-      displayCont: false,
-      displayLoading: true
+      displayCont: true,
+      displayLoading: false
     }
   }
  
@@ -31,18 +31,18 @@ componentDidMount() {
     });
 
     // Transitions for loading cont
-    setTimeout(() => {
-      // Hide dot from i letter
-      document.querySelector('.mcwlog_fdot').style.opacity = '0';
-    }, 1700);
-    setTimeout(() => {
-      // Decrease opacity for loading page
-      document.querySelector('.main_c_loadingwrap').style.opacity = '0';
-      // Render all components and hide unmount loading container
-      setTimeout(() => {
-        this.setState({ displayLoading: false, displayCont: true })
-      }, 300);
-    }, 2500);
+    // setTimeout(() => {
+    //   // Hide dot from i letter
+    //   document.querySelector('.mcwlog_fdot').style.opacity = '0';
+    // }, 1700);
+    // setTimeout(() => {
+    //   // Decrease opacity for loading page
+    //   document.querySelector('.main_c_loadingwrap').style.opacity = '0';
+    //   // Render all components and hide unmount loading container
+    //   setTimeout(() => {
+    //     this.setState({ displayLoading: false, displayCont: true })
+    //   }, 300);
+    // }, 2500);
 }
 
 

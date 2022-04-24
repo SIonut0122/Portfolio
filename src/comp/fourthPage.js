@@ -267,7 +267,7 @@ class FourthPage extends React.Component {
                 </div>
                 <div className='fth_stwo_wremail'>
                  
-                  <a href='mailto:sionut0122@yahoo.com' tabIndex='0' role='sionut0122@yahoo.com'>sionut0122@yahoo.com</a>
+                  <a href='mailto:sionut0122@yahoo.com' tabIndex='0' role='sionut0122@yahoo.com'>sionut0122@gmail.com</a>
                 </div>
                 <div className='fth_ct_socialmenu' >
                   <span tabIndex='0' role='social'>Social</span>

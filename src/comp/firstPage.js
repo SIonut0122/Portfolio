@@ -641,6 +641,7 @@ class FirstPage extends React.Component {
 
 
       
+      
       let clock = new THREE.Clock();
  
       // ---------- ANIMATE ----------- //
@@ -951,6 +952,7 @@ class FirstPage extends React.Component {
       document.querySelector('.fth_goup_btn').addEventListener('click', () => {
         smoothScroll.scrollIntoView(document.querySelector('.wrap_fp_cont'));
       })
+
 }
 
 
