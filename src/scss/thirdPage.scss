@@ -139,7 +139,7 @@ $darkRedColor: #7d160b;
 	top:-30px;
 	left:20px;
 	z-index: 15;
-	
+	@include disable-select();
 	font-family: "Acme",sans-serif;
  
 }

@@ -1,9 +1,9 @@
-import React from 'react';
-import gsap from "gsap";
-import sp1 from '../img/sp1.png';
+import React      from 'react';
+import gsap       from "gsap";
+import sp1        from '../img/sp1.png';
+import Scrollbar  from 'smooth-scrollbar';
 import * as THREE from 'three';
-import TWEEN, { Tween } from "tween";
-import Scrollbar from 'smooth-scrollbar';
+import TWEEN      from "tween";
 import '../css/firstPage.css';
  
  
@@ -561,13 +561,13 @@ class FirstPage extends React.Component {
       ];
       
       
-      const starsT1 = new THREE.Points(geometrys[0], materials[0]);
-      const starsT2 = new THREE.Points(geometrys[1], materials[1]);
-      scene2.add(starsT1);
-      scene2.add(starsT2);
-      
-      // Detect mobile on mount to resize mesh
-      detectMobile();
+        const starsT1 = new THREE.Points(geometrys[0], materials[0]);
+        const starsT2 = new THREE.Points(geometrys[1], materials[1]);
+        scene2.add(starsT1);
+        scene2.add(starsT2);
+        
+        // Detect mobile on mount to resize mesh
+        detectMobile();
       }
       
       
@@ -591,7 +591,6 @@ class FirstPage extends React.Component {
      // ---------- RESIZE ----------- //
 
       window.addEventListener('resize', (e) => {
-    
         // Resize objects depending on device size
         if(window.innerWidth < 500) {
           mesh.position.x = 0;
@@ -622,7 +621,6 @@ class FirstPage extends React.Component {
           }
         }
 
-
         let width = window.innerWidth;
         let height = window.innerHeight;
 
@@ -637,11 +635,6 @@ class FirstPage extends React.Component {
         camera2.updateProjectionMatrix();
       })
 
-
-
-
-      
-      
       let clock = new THREE.Clock();
  
       // ---------- ANIMATE ----------- //
@@ -947,14 +940,12 @@ class FirstPage extends React.Component {
         fpNavLink.forEach(nav => nav.addEventListener('click', (e) => this.selectMobNav(e)));
       }
 
-
        // Add click listener to fourth page backtotop btn
       document.querySelector('.fth_goup_btn').addEventListener('click', () => {
         smoothScroll.scrollIntoView(document.querySelector('.wrap_fp_cont'));
       })
 
 }
-
 
 
 onPointerMove(e) {
@@ -969,10 +960,6 @@ onPointerMove(e) {
     // Animate meteors
     let translate;
         mesh.rotation.y = (e.clientX / canvBound.width ) * 2 - 1;
-
-        // unusefull / delete after
-        // bigMesh.rotation.y =  ( e.clientX / canvBound.height ) * 0.05 + 1;
-        // bigMesh.rotation.x =  (e.clientY / canvBound.width ) * 0.05 + 1;
     
     // Stars background parallax
     // If wrapper 2 is mounted, proceed 
@@ -1150,8 +1137,11 @@ selectMobNav(e) {
             <div className='fPage_container' onMouseMove={(e) => this.onPointerMove(e)}>
                 <div className='fp_c_first'>
                 <div className='fpc_g_htxt fpcg_htxt_si'  tabIndex='0' role='Stan Ionut'><div>Stan Ionut</div><span className='fpcg_htxtsi_lthr'></span></div>
-                <div className='fpc_g_htxt' tabIndex='0' role='frontend'><div className='fpghtxt_fe'>Front-End</div><span></span></div> 
-                <div className='fpc_g_htxt' tabIndex='0' role='developer'><div className='fpghtxt_dev'>Developer</div><span></span></div> 
+                <div className='fpc_g_htxt' tabIndex='0' role='frontend'><div className='bftxt_fth Front-end fpghtxt_fe'>Front-End</div><span></span></div> 
+                <div className='fpc_g_htxt' tabIndex='0' role='developer'>
+                  <div className='bftxt_fth Developer fpghtxt_dev'>Developer</div>
+                    
+                  </div> 
                 </div>
 
                 {/* Social container */}

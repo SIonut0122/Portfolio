@@ -1,12 +1,9 @@
-import '../css/secPage.css';
-import React from 'react';
-import * as THREE from 'three';
- 
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
-import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
- 
+import React            from 'react';
+import * as THREE       from 'three';
+import { GLTFLoader  }  from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader }  from 'three/examples/jsm/loaders/DRACOLoader';
 import dna from '../glb/dna.glb';
+import '../css/secPage.css';
 
  
 
@@ -14,8 +11,6 @@ import dna from '../glb/dna.glb';
 let width, height, composer;
 let scene,camera,dnaMesh,renderer,canvas,controls,pointlight,wrapper,tanFOV,windowHeight;
 let geometry, ctx, material;
-
-var clock = new THREE.Clock();
 let time = 0;
 let settings = {
   progress:0
