@@ -17,27 +17,22 @@ let settings = {
 }
 
 
-// var scrollTime = 0.7;			//Scroll time
-// var scrollDistance = 170;	
-
-
 class secondPage extends React.Component {
 
   
   componentDidMount() {
    let self = this;
-
-  //  document.querySelector('.sec_wrap_cont').addEventListener('wheel', (e) => this.secScroll(e));
-
   window.addEventListener('resize', () => this.resize());
 
   
     function init() {
+
+      // Calculate canvas size method
       // let canvas = wrapper.getElementsByTagName('canvas')[0];
       // let canvBound = wrapper.getBoundingClientRect()
       
       //  let canvBound = wrapper.getBoundingClientRect();
-      
+
       // canvas.width = 100;
       // canvas.height = 100;
       // canvas.style.display = 'block';
@@ -48,14 +43,16 @@ class secondPage extends React.Component {
       
       // Create scene
         scene = new THREE.Scene();
-      
         renderer = new THREE.WebGLRenderer();
 
+        // Get canvas size
         wrapper = document.querySelector('.secwr_cont_canvas');
         width = wrapper.offsetWidth;
         height = wrapper.offsetHeight;
+        
+        // set extra quality
+        renderer.setPixelRatio(window.devicePixelRadio, 2); 
 
-        renderer.setPixelRatio(window.devicePixelRadio, 2); // set extra quality
         renderer.setSize(width ,height);
         // For better quality
         renderer.outputEncoding = THREE.sRGBEncoding;
@@ -63,27 +60,18 @@ class secondPage extends React.Component {
         renderer.physicallyCorrectLights = true;
         renderer.setClearColor(0x000, 1);
         
-
+        // Load object
         let loader = new GLTFLoader();
         let dracoLoader = new DRACOLoader();
         dracoLoader.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/');
         loader.setDRACOLoader(dracoLoader);
         
-
         wrapper.appendChild(renderer.domElement);
  
         // Set camera
         camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
         camera.position.set(0,0,10);
-       
 
-        // Controlling the object
-        // controls = new OrbitControls(camera, renderer.domElement);
-        // controls.enableZoom = false;
-        // controls.enablePan = false;
-        // controls.autoRotate = false;
-        // controls.autoRotateSpeed = 1.5;
-        // controls.enableDamping = false;
 
         // GUI
 
@@ -91,11 +79,11 @@ class secondPage extends React.Component {
            geometry = glb.scene.children[0].geometry;
            geometry.center();
            
-          addObjects();
- 
-          animate();
-          self.resize();
-        
+           // When 3d object is loading,proceed.
+            addObjects();
+            animate();
+            self.resize();
+          
         })
          
         
@@ -103,8 +91,8 @@ class secondPage extends React.Component {
  
 
       function addObjects() {
-     
-
+        
+        // DNA mesh settings
         material = new THREE.ShaderMaterial( {
           extensions: {
             derivatives: "#extension GL_0ES_standard_derivatives : enable"
@@ -159,42 +147,33 @@ class secondPage extends React.Component {
         dnaMesh.position.x = -2;
      
         scene.add(dnaMesh);
-
-  
       }
 
  
       
       function animate() {
- 
-       time += 0.05;
+        time += 0.05;
         dnaMesh.rotation.y = time/25;
         material.uniforms.time.value = time;
         material.uniforms.progress.value = settings.time;
+
         // Update time uniform
         requestAnimationFrame(animate);
         renderer.render(scene,camera);
-        // controls.update();
-        //composer.render();
-       
       }
 
-     
-
-      init();
-
-   
+      init(); 
 }
  
 
-resize() {
-  width = wrapper.offsetWidth;
-  height = wrapper.offsetHeight;
-  renderer.setSize(width, height);
- 
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-}
+  resize() {
+    width = wrapper.offsetWidth;
+    height = wrapper.offsetHeight;
+    renderer.setSize(width, height);
+  
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  }
 
 
   render() {
@@ -221,14 +200,14 @@ resize() {
                     <span className='secwrc_ab_sktit' tabIndex='0' role='skills'>Skills</span>
                     <div className='secwrc_wmttxt_two_skills'>
                       <div className='swt_two_skills_col'>
-                        <span tabIndex='0' role='Javascript'>Javascript</span>
-                        <span tabIndex='0' role='HTML'>HTML</span>
-                        <span tabIndex='0' role='SCSS'>SCSS</span>
+                        <span tabIndex='0' role='Javascript'>HTML</span>
+                        <span tabIndex='0' role='HTML'>SCSS</span>
+                        <span tabIndex='0' role='SCSS'>Javascript</span>
                       </div>
                       <div className='swt_two_skills_col'>
-                        <span tabIndex='0' role='Bootstrap'>Bootstrap</span>
                         <span tabIndex='0' role='ReactJs'>React.js</span>
                         <span tabIndex='0' role='Redux'>Redux</span>
+                        <span tabIndex='0' role='Bootstrap'>Bootstrap</span>
                       </div>
                       <div className='swt_two_skills_col'>
                         <span tabIndex='0' role='Webpack'>Webpack</span>
